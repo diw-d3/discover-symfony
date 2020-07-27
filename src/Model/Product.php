@@ -4,6 +4,8 @@ namespace App\Model;
 
 class Product
 {
+    private static $autoIncrement = 1;
+    private $id;
     private $name;
     private $slug;
     private $description;
@@ -11,10 +13,16 @@ class Product
 
     public function __construct($name, $slug, $description, $price)
     {
+        $this->id = self::$autoIncrement++;
         $this->name = $name;
         $this->slug = $slug;
         $this->description = $description;
         $this->price = $price;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getName()

@@ -3,34 +3,43 @@
 {% block title %}Ma liste de produits - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <table>
-        <thead>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Prix</th>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container mt-5 mb-5">
+        <h1 class="text-center mb-5">Nos produits</h1>
+        <div>
+            <table class="table">
+                <thead class="thead-dark">
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Prix</th>
+                    <th scope="col">Actions</th>
+                </thead>
+                <tbody>
+                {% for product in products %}
+                    <tr>
+                        <th scope="row">{{ product.id }}</th>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }} €</td>
+                        <td><a href="{{ path('product_show', { slug: product.slug }) }}" class="btn btn-secondary">Voir le produit</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    <div>
-        {% if page > 1 %}
-        <a href="{{ path('product_list', { page: page - 1 }) }}">Page précédente</a>
-        {% endif %}
-        {% if page < max_page %}
-        <a href="{{ path('product_list', { page: page + 1 }) }}">Page suivante</a>
+        <div>
+            {% if page > 1 %}
+                <a href="{{ path('product_list', { page: page - 1 }) }}">Page précédente</a>
+            {% endif %}
+            {% if page < max_page %}
+                <a href="{{ path('product_list', { page: page + 1 }) }}">Page suivante</a>
+            {% endif %}
+        </div>
+
+        {% if app.debug %}
+            <p>Méthode HTTP: {{ app.request.method }}</p>
+            <p>Environnement Symfony: {{ app.environment }}</p>
         {% endif %}
     </div>
-
-    {% if app.debug %}
-        <p>Méthode HTTP: {{ app.request.method }}</p>
-        <p>Environnement Symfony: {{ app.environment }}</p>
-    {% endif %}
 {% endblock %}

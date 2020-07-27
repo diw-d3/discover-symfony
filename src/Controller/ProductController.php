@@ -93,4 +93,24 @@ class ProductController extends AbstractController
 
         return $this->json($this->products);
     }
+
+    /**
+     * @Route("/product/order/{slug}", name="product_order")
+     */
+    public function order(string $slug)
+    {
+        // $product = array_filter($this->products, fn ($product) => $product->getSlug() === $slug)[0] ?? false;
+        $product = array_filter($this->products, function ($product) use ($slug) {
+            return $product->getSlug() === $slug;
+        })[0] ?? false;
+
+        if (!$product) {
+            throw $this->createNotFoundException('Le produit n\'existe pas.');
+        }
+
+        $this->addFlash('success', "Le produit {$product->getName()} a été commandé.");
+        // $this->addFlash('danger', 'Test');
+
+        return $this->redirectToRoute('product_list');
+    }
 }

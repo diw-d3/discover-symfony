@@ -20,7 +20,6 @@ class WelcomeController extends AbstractController
         $name = ucfirst($name);
 
         dump($name);
-        throw $this->createNotFoundException('Test');
 
         /* return new Response(
             '<html><body>Hello '.$name.'</body></html>'
