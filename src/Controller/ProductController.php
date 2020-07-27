@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Route("/prefix")
+ */
 class ProductController extends AbstractController
 {
     private $products = [];
@@ -50,6 +53,8 @@ class ProductController extends AbstractController
 
         return $this->render('product/list.html.twig', [
             'products' => $products,
+            'page' => $page,
+            'max_page' => $maxPage,
         ]);
     }
 

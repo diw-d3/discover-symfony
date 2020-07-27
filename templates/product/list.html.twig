@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Ma liste de produits - {{ parent() }}{% endblock %}
+
 {% block body %}
     <table>
         <thead>
@@ -17,4 +19,18 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <div>
+        {% if page > 1 %}
+        <a href="{{ path('product_list', { page: page - 1 }) }}">Page précédente</a>
+        {% endif %}
+        {% if page < max_page %}
+        <a href="{{ path('product_list', { page: page + 1 }) }}">Page suivante</a>
+        {% endif %}
+    </div>
+
+    {% if app.debug %}
+        <p>Méthode HTTP: {{ app.request.method }}</p>
+        <p>Environnement Symfony: {{ app.environment }}</p>
+    {% endif %}
 {% endblock %}
