@@ -1,0 +1,4 @@
+To translate: A traduire
+Hello %name%: Bonjour %name%
+There is one user|There are %count% users:
+  '[0,4] Il y a un utilisateur| [5,Inf] Il y a %count% utilisateurs'

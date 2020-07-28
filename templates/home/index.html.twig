@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ 'To translate' | trans }}</h1>
+        <h2>{{ 'Hello %name%' | trans({'%name%': name}) }}</h2>
+
+        <p>{{ 'There is one user|There are %count% users' | trans({'%count%': 2}) }}</p>
+        <p>{{ 'There is one user|There are %count% users' | trans({'%count%': 5}) }}</p>
+
+        <p>{{ 'todo' | trans }}</p>
+    </div>
+{% endblock %}
