@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    @todo
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+
+        <button formnovalidate>Créer le produit</button>
+    {{ form_end(form) }}
 {% endblock %}

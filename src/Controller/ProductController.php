@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\ProductType;
 use App\Model\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +26,34 @@ class ProductController extends AbstractController
             new Product('iPhone XR', 'iphone-xr', 'Un iPhone de 2018', 1099),
             new Product('iPhone XS', 'iphone-xs', 'Un iPhone de 2019', 1199),
         ];
-    } 
+    }
+
+    /**
+     * @Route("/product/create", name="product_create")
+     */
+    public function create(Request $request)
+    {
+        $product = new Product();
+
+        /** @var FormInterface $form */
+        /* $form = $this->createFormBuilder($product)
+            ->add('name', TextType::class)
+            ->add('description', TextareaType::class)
+            ->getForm(); */
+        
+        $form = $this->createForm(ProductType::class, $product);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            dump($product);
+            dump($form->getData() === $product);
+        }
+
+        return $this->render('product/create.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
     /**
      * @Route("/product/random", name="product_random")
@@ -72,14 +103,6 @@ class ProductController extends AbstractController
         }
 
         throw $this->createNotFoundException('Le produit n\'existe pas.');
-    }
-
-    /**
-     * @Route("/product/create", name="product_create")
-     */
-    public function create()
-    {
-        return $this->render('product/create.html.twig');
     }
 
     /**
