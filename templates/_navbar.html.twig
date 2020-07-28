@@ -21,6 +21,15 @@
                 <li class="nav-item {{ current_route == 'hello' ? 'active' }}">
                     <a class="nav-link" href="{{ path('hello') }}">Hello</a>
                 </li>
+                <li class="nav-item {{ current_route == 'post' ? 'active' }}">
+                    <a class="nav-link" href="{{ path('post') }}">Markdown</a>
+                </li>
+                <li class="nav-item {{ current_route == 'product_create' ? 'active' }}">
+                    <a class="nav-link" href="{{ path('product_create') }}">Créer un produit</a>
+                </li>
+                <li class="nav-item {{ current_route == 'contact' ? 'active' }}">
+                    <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                </li>
             </ul>
         </div>
     </div>
